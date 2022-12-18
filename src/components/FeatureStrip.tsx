@@ -1,5 +1,30 @@
 import React, { FC } from 'react';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+    slidesToSlide: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1
+  }
+};
 
 interface FeatureStripProps {
   title: string,
@@ -17,20 +42,16 @@ const FeatureStrip: FC<FeatureStripProps> = (props: FeatureStripProps) => (
       <p className={`mt-4 text-gray-500 xl:mt-6 dark:text-gray-300 ${props.right? 'text-right':''}`}>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam voluptatibus
       </p>
-      <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-4">
+      <Carousel responsive={responsive} autoPlay={true} infinite={true} centerMode={true}>
         {props.tiles.map(p =>
-          <div key={p}
+          <a key={p} href="/"
             className="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-900 via-amber-900 to-rose-700 
-            lg:h-72 p-8 space-y-3 border-2 border-red-400 dark:border-red-300 rounded-xl flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-semibold text-gray-700 uppercase dark:text-white">{p}</h1>
-            <a href="#" className="inline-flex p-2 text-red-500 capitalize transition-colors duration-200 transform bg-red-100 rounded-full dark:bg-red-500 dark:text-white hover:underline hover:text-red-600 dark:hover:text-red-500">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </a>
-          </div>
+            h-72 mr-8 mt-8 p-8 space-y-3 border-2 border-red-400 dark:border-red-300 rounded-xl flex flex-col items-center justify-center
+            text-3xl font-semibold text-gray-700 uppercase dark:text-white opacity-90 hover:opacity-100">
+            {p}
+          </a>
         )}
-      </div>
+      </Carousel>
     </div>
   </section>
 );
