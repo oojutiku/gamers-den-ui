@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import pic from '../assets/controller-gb662aa2f1_1280.png'
 
 interface HeroProps {}
 
 const Hero: FC<HeroProps> = () => (
-  <section className = "container m-auto px-4 py-32 lg:flex lg:h-screen lg:items-center justify-around">
+  <section className = "container m-auto pb-32 py-24 lg:flex lg:h-screen lg:items-center justify-around">
     <div className="text-center">
       <h1 className="text-3xl font-extrabold sm:text-5xl">
         Welcome to the <br />
@@ -22,7 +23,7 @@ const Hero: FC<HeroProps> = () => (
           className="block w-full rounded bg-red-900 px-12 py-3 text-sm font-medium text-white shadow hover:bg-red-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
           href="/get-started"
         >
-          Get Started
+          <Link to='/games'>Get Started</Link>
         </a>
 
         <a

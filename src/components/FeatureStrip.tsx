@@ -15,12 +15,12 @@ const responsive = {
     slidesToSlide: 3
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
+    breakpoint: { max: 1024, min: 480 },
     items: 2,
     slidesToSlide: 2
   },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 480, min: 0 },
     items: 1,
     slidesToSlide: 1
   }
@@ -34,7 +34,7 @@ interface FeatureStripProps {
 
 const FeatureStrip: FC<FeatureStripProps> = (props: FeatureStripProps) => (
   <section>
-    <div className='container px-6 py-10 mx-auto'>
+    <div className='container px-6 py-10 mx-auto mb-20'>
       <h2 className={`text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white ${props.right? 'text-right':''}`}>
         explore by <br />
         <span className="text-6xl text-red-700 font-serif">{props.title}</span>

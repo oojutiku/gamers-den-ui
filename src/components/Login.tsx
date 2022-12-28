@@ -1,18 +1,15 @@
 import React, { FC } from 'react';
-import ReactDom from 'react-dom';
-import Modal from 'react-modal';
-
-Modal.setAppElement('#root');
-
-
+import { Link, useLocation } from 'react-router-dom';
+import Modal from './Modal';
 interface LoginProps {
-  show: boolean;
+  
 }
 
 const Login: FC<LoginProps> = (props: LoginProps) => {
 
+  const location = useLocation();
   return (
-    <Modal isOpen={props.show}>
+    <Modal>
       <form className="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" action="#">
         <h3 className="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
         <div>
@@ -36,7 +33,9 @@ const Login: FC<LoginProps> = (props: LoginProps) => {
         </div>
         <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-          Not registered? <a href="/register" className="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
+          Not registered? <a href="/register" className="text-blue-700 hover:underline dark:text-blue-500">
+            <Link to='/register' state={{ background: location }} >Sign up</Link>
+          </a>
         </div>
       </form>
     </Modal>

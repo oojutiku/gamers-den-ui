@@ -34,13 +34,13 @@ const players = [
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => (
-  <main>
+  <>
     <Hero />
     <FeatureStrip title='Platforms' tiles={platforms} right={false} />
     <FeatureStrip title='Genres' tiles={genres} right={true} />
     <FeatureStrip title='Price' tiles={price} right={false} />
     <FeatureStrip title='Players' tiles={players} right={true} />
-  </main>
+  </>
 );
 
 export default Home;

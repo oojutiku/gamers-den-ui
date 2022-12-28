@@ -1,22 +1,38 @@
 import React from 'react';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import GameResults from './GameResults';
 import Home from './Home';
 import Layout from './Layout';
+import Login from './Login';
+import Register from './Register';
 import UnknownPage from './UnknownPage';
 
 function App() {
+
+  const location = useLocation();
+  const background = location.state && location.state.background;
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <>
+      <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='games' element={<GameResults />} />
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
           <Route path='*' element={<UnknownPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+      {
+        background && (
+          <Routes>
+            <Route path='login' element={<Login />} />
+            <Route path='register' element={<Register />} />
+          </Routes>
+        )
+      }
+    </>
   );
 }
 
