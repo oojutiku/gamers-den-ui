@@ -14,18 +14,60 @@ const Header: FC<HeaderProps> = (props: HeaderProps) => {
   return (
     <>
       <header className='bg-gray-50/70 dark:bg-slate-900/70 fixed z-10 backdrop-blur w-screen'>
-        <nav className="container mx-auto relative px-4 py-4 flex justify-between items-center">
-          <a className="text-3xl font-bold leading-none" href="/">
-            <img className='h-10' src={logo} alt='Gamers Den Logo'></img>
-          </a>
-          <div>
-            <button className="mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200">
-              <Link to='/login' state={{background: location}} >Sign In</Link>
-            </button>
-            <button className="mr-3 py-2 px-6 bg-red-900 hover:bg-red-700 text-sm text-white font-bold rounded-xl transition duration-200">
-              <Link to='/register' state={{ background: location }} >Sign up</Link>
-            </button>
+        <nav
+          className="flex items-center justify-between flex-wrap py-4 lg:px-12">
+          <div className="flex justify-between lg:w-auto w-full lg:border-b-0 pl-6 pr-2 border-solid border-b-2 border-gray-300 pb-5 lg:pb-0">
+            <div className="flex items-center flex-shrink-0 mr-16">
+              <img className='h-10' src={logo} alt='Gamers Den Logo' />
+              <span className="font-semibold text-xl tracking-tight">Gamer's Den</span>
+            </div>
+            <div className="block lg:hidden ">
+              <button
+                id="nav"
+                className="flex items-center px-3 py-2 border-2 rounded text-red-700 border-red-700 hover:text-red-700 hover:border-red-700">
+                <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title>
+                  <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+              </button>
+            </div>
           </div>
+
+          <div className="menu w-full lg:block flex-grow lg:flex lg:items-center lg:w-auto lg:px-3 px-8">
+            <div className="text-md font-bold lg:flex-grow">
+              <a href="/games"
+                className="block mt-4 lg:inline-block lg:mt-0 px-4 py-2 rounded hover:bg-red-900 hover:text-white mr-2">
+                Our Database
+              </a>
+              <a href="/playroom"
+                className=" block mt-4 lg:inline-block lg:mt-0 px-4 py-2 rounded hover:bg-red-900 hover:text-white mr-2">
+                Playroom
+              </a>
+              <a href="/news"
+                className="block mt-4 lg:inline-block lg:mt-0 px-4 py-2 rounded hover:bg-red-900 hover:text-white mr-2">
+                News
+              </a>
+            </div>
+            <div className="relative mx-auto text-gray-600 lg:block hidden">
+              <input
+                className="border-2 border-gray-300 bg-white h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
+                type="search" name="search" placeholder="Search" />
+                <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
+                  <svg className="text-gray-600 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                    version="1.1" id="Capa_1" x="0px" y="0px"
+                    viewBox="0 0 56.966 56.966"
+                    xmlSpace="preserve"
+                    width="512px" height="512px">
+                    <path
+                      d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                  </svg>
+                </button>
+            </div>
+            <div className="flex ">
+              <a href="/den"
+                className="block text-md px-4 py-2 rounded ml-2 font-bold text-white mt-4 bg-red-900 lg:mt-0">My den</a>
+            </div>
+          </div>
+
         </nav>
         </header>
     </>

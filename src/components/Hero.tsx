@@ -5,7 +5,7 @@ import pic from '../assets/controller-gb662aa2f1_1280.png'
 interface HeroProps {}
 
 const Hero: FC<HeroProps> = () => (
-  <section className = "container m-auto pb-32 py-24 lg:flex lg:h-screen lg:items-center justify-around">
+  <section className = "container m-auto pb-32 py-24 flex lg:h-screen items-center justify-around">
     <div className="text-center">
       <h1 className="text-3xl font-extrabold sm:text-5xl">
         Welcome to the <br />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import Den from './Den';
 import GameResults from './GameResults';
 import Home from './Home';
 import Layout from './Layout';
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='games' element={<GameResults />} />
+          <Route path='den' element={<Den />} />
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
           <Route path='*' element={<UnknownPage />} />

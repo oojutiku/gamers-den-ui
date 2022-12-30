@@ -1,46 +1,124 @@
-import React, { FC } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { FC, FormEvent, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from 'aws-amplify';
 import Modal from './Modal';
 
 
-interface RegisterProps {}
+interface RegisterProps { }
+
+const INITIAL_STATE = {
+  username: '',
+  email: '',
+  password: '',
+  cpassword: ''
+}
 
 const Register: FC<RegisterProps> = () => {
+
+  const navigate = useNavigate();
+  const [form, setForm] = useState(INITIAL_STATE);
   
-  const location = useLocation();
+  const handleChange = (event: FormEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [event.currentTarget.id]: event.currentTarget.value
+    })
+  }
+
+  const handleSubmit = (event: FormEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    navigate(-1);
+    setForm(INITIAL_STATE);
+  }
+
   return (
 
-  <Modal>
-    <form className="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" action="#">
-      <h3 className="text-xl font-medium text-gray-900 dark:text-white">Create an account</h3>
-      <div>
-        <label htmlFor="email" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Your email</label>
-        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required={true} />
-      </div>
-      <div>
-        <label htmlFor="password" className="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Your password</label>
-        <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required={true} />
-      </div>
-      <div className="flex justify-between">
-        <div className="flex items-start">
-          <div className="flex items-center h-5">
-            <input id="remember" aria-describedby="remember" type="checkbox" className="bg-gray-50 border border-gray-300 focus:ring-3 focus:ring-blue-300 h-4 w-4 rounded dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800" />
+    <Modal>
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl ">
+          Create an account
+        </h1>
+        <form className="space-y-4 md:space-y-6" action="#">
+          <div>
+            <label htmlFor="username" className="block mb-2 text-sm font-medium  ">Display name</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 "
+              placeholder="Gamer123"
+              autoFocus
+              autoComplete='nickname'
+              value={form.username}
+              onChange={handleChange}
+            />
           </div>
-          <div className="text-sm ml-3">
-            <label htmlFor="remember" className="font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+          <div>
+            <label htmlFor="email" className="block mb-2 text-sm font-medium  ">
+              Your email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="bg-gray-50 border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 "
+              placeholder="name@company.com"
+              autoComplete='email'
+              value={form.email}
+              onChange={handleChange}
+            />
           </div>
-        </div>
-        <a href="#" className="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+          <div>
+            <label htmlFor="password" className="block mb-2 text-sm font-medium  ">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="••••••••"
+              className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              autoComplete='new-password'
+              value={form.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="cpassword" className="block mb-2 text-sm font-medium">
+              Confirm password
+            </label>
+            <input
+              type="password"
+              name="cpassword"
+              id="cpassword"
+              placeholder="••••••••"
+              className="bg-gray-50 border border-gray-300  sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              autoComplete='new-password'
+              value={form.cpassword}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="flex items-start">
+            <div className="flex items-center h-5">
+              <input
+                id="terms"
+                aria-describedby="terms"
+                type="checkbox"
+                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" />
+            </div>
+            <div className="ml-3 text-sm">
+              <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-red-700" href="/">Terms and Conditions</a></label>
+            </div>
+          </div>
+          <button type="submit" className="w-full text-white bg-red-900 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Create an account</button>
+          <p className="text-sm font-light">
+            Already have an account? <a href="/" className="font-medium text-red-700 hover:underline">Login here</a>
+          </p>
+        </form>
       </div>
-      <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
-      <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-        Already have an account? <a href="/login" className="text-blue-700 hover:underline dark:text-blue-500">
-          <Link to='/login' state={{ background: location }} >Sign In</Link>
-        </a>
-      </div>
-    </form>
-  </Modal>
-)
+    </Modal>
+  )
 }
 
 export default Register;

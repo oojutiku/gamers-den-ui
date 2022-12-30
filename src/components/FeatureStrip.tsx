@@ -47,7 +47,7 @@ const FeatureStrip: FC<FeatureStripProps> = (props: FeatureStripProps) => (
           <a key={p} href="/"
             className="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-900 via-amber-900 to-rose-700 
             h-72 mr-8 mt-8 p-8 space-y-3 border-2 border-red-400 dark:border-red-300 rounded-xl flex flex-col items-center justify-center
-            text-3xl font-semibold text-gray-700 uppercase dark:text-white opacity-90 hover:opacity-100">
+            text-3xl font-semibold uppercase text-white opacity-90 hover:opacity-100">
             {p}
           </a>
         )}
